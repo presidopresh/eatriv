@@ -25,7 +25,7 @@ const steps = [
     type: "inputs",
     fields: [
       { id: "age", label: "Age", placeholder: "e.g. 22", type: "number" },
-      { id: "sex", label: "Sex", placeholder: "", type: "select", options: ["Male", "Female", "Prefer not to say"] },
+      { id: "sex", label: "Sex", type: "select", options: ["Male", "Female", "Prefer not to say"] },
       { id: "weight", label: "Weight (kg)", placeholder: "e.g. 75", type: "number" },
       { id: "height", label: "Height (cm)", placeholder: "e.g. 170", type: "number" },
     ],
@@ -88,7 +88,10 @@ const steps = [
 export default function Onboarding() {
   const [current, setCurrent] = useState(0);
   const [answers, setAnswers] = useState<Record<string, any>>({});
-  const [bodyFields, setBodyFields] = useState<Record<string, string>>({});
+  const [age, setAge] = useState("");
+  const [sex, setSex] = useState("");
+  const [weight, setWeight] = useState("");
+  const [height, setHeight] = useState("");
   const [done, setDone] = useState(false);
 
   const step = steps[current];
@@ -115,16 +118,14 @@ export default function Onboarding() {
   function canProceed() {
     if (step.type === "single") return !!answers[step.key];
     if (step.type === "multi") return true;
-    if (step.type === "inputs") {
-      return bodyFields.age && bodyFields.sex && bodyFields.weight && bodyFields.height;
-    }
+    if (step.type === "inputs") return !!age && !!sex && !!weight && !!height;
     return true;
   }
 
   function next() {
     if (!canProceed()) return;
     if (step.type === "inputs") {
-      setAnswers({ ...answers, body: bodyFields });
+      setAnswers({ ...answers, body: { age, sex, weight, height } });
     }
     if (current < steps.length - 1) {
       setCurrent(current + 1);
@@ -145,12 +146,12 @@ export default function Onboarding() {
           <h2 className="text-3xl font-light text-[#1A1A1A] mb-2" style={{ fontFamily: "Georgia, serif" }}>
             Your plan is ready!
           </h2>
-         <p className="text-gray-500 mb-6">Eatriv is building your personalised meal plan and grocery list right now.</p>
-  <a href="/signup">
-    <button className="w-full bg-[#2D6A4F] text-white py-3 rounded-xl font-medium hover:bg-[#235c43] transition-all">
-      Go to my meal plan →
-    </button>
-  </a>
+          <p className="text-gray-500 mb-6">Eatriv is building your personalised meal plan and grocery list right now.</p>
+          <a href="/signup">
+            <button className="w-full bg-[#2D6A4F] text-white py-3 rounded-xl font-medium hover:bg-[#235c43] transition-all">
+              Go to my meal plan →
+            </button>
+          </a>
         </div>
       </main>
     );
@@ -226,32 +227,68 @@ export default function Onboarding() {
           </div>
         )}
 
-        {/* Input fields */}
+        {/* Input fields — fixed version */}
         {step.type === "inputs" && (
-          <div className="grid grid-cols-2 gap-3">
-            {step.fields?.map((field: any) => (
-              <div key={field.id}>
-                <label className="text-xs font-medium text-gray-500 mb-1 block">{field.label}</label>
-                {field.type === "select" ? (
-                  <select
-                    className="w-full p-3 border-2 border-gray-200 rounded-xl text-sm focus:border-[#2D6A4F] outline-none bg-white"
-                    value={bodyFields[field.id] || ""}
-                    onChange={(e) => setBodyFields({ ...bodyFields, [field.id]: e.target.value })}
-                  >
-                    <option value="">Select</option>
-                    {field.options.map((o: string) => <option key={o}>{o}</option>)}
-                  </select>
-                ) : (
-                  <input
-                    type={field.type}
-                    placeholder={field.placeholder}
-                    className="w-full p-3 border-2 border-gray-200 rounded-xl text-sm focus:border-[#2D6A4F] outline-none"
-                    value={bodyFields[field.id] || ""}
-                    onChange={(e) => setBodyFields({ ...bodyFields, [field.id]: e.target.value })}
-                  />
-                )}
-              </div>
-            ))}
+          <div className="grid grid-cols-2 gap-4">
+
+            <div>
+              <label className="text-xs font-medium text-gray-600 mb-1 block">Age</label>
+              <input
+                type="number"
+                min="1"
+                max="120"
+                placeholder="e.g. 22"
+                value={age}
+                onChange={(e) => setAge(e.target.value)}
+                onKeyDown={(e) => ["e","E","+","-","."].includes(e.key) && e.preventDefault()}
+                style={{ color: "#1A1A1A", backgroundColor: "#FFFFFF" }}
+                className="w-full p-3 border-2 border-gray-200 rounded-xl text-sm focus:border-[#2D6A4F] outline-none"
+              />
+            </div>
+
+            <div>
+              <label className="text-xs font-medium text-gray-600 mb-1 block">Sex</label>
+              <select
+                value={sex}
+                onChange={(e) => setSex(e.target.value)}
+                style={{ color: "#1A1A1A", backgroundColor: "#FFFFFF" }}
+                className="w-full p-3 border-2 border-gray-200 rounded-xl text-sm focus:border-[#2D6A4F] outline-none"
+              >
+                <option value="">Select</option>
+                <option>Male</option>
+                <option>Female</option>
+                <option>Prefer not to say</option>
+              </select>
+            </div>
+
+            <div>
+              <label className="text-xs font-medium text-gray-600 mb-1 block">Weight (kg)</label>
+              <input
+                type="number"
+                min="1"
+                placeholder="e.g. 75"
+                value={weight}
+                onChange={(e) => setWeight(e.target.value)}
+                onKeyDown={(e) => ["e","E","+","-","."].includes(e.key) && e.preventDefault()}
+                style={{ color: "#1A1A1A", backgroundColor: "#FFFFFF" }}
+                className="w-full p-3 border-2 border-gray-200 rounded-xl text-sm focus:border-[#2D6A4F] outline-none"
+              />
+            </div>
+
+            <div>
+              <label className="text-xs font-medium text-gray-600 mb-1 block">Height (cm)</label>
+              <input
+                type="number"
+                min="1"
+                placeholder="e.g. 170"
+                value={height}
+                onChange={(e) => setHeight(e.target.value)}
+                onKeyDown={(e) => ["e","E","+","-","."].includes(e.key) && e.preventDefault()}
+                style={{ color: "#1A1A1A", backgroundColor: "#FFFFFF" }}
+                className="w-full p-3 border-2 border-gray-200 rounded-xl text-sm focus:border-[#2D6A4F] outline-none"
+              />
+            </div>
+
           </div>
         )}
 
