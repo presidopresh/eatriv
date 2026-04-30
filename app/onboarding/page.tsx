@@ -145,10 +145,12 @@ export default function Onboarding() {
           <h2 className="text-3xl font-light text-[#1A1A1A] mb-2" style={{ fontFamily: "Georgia, serif" }}>
             Your plan is ready!
           </h2>
-          <p className="text-gray-500 mb-6">Eatriv is building your personalised meal plan and grocery list right now.</p>
-          <button className="w-full bg-[#2D6A4F] text-white py-3 rounded-xl font-medium hover:bg-[#235c43] transition-all">
-            Go to my meal plan →
-          </button>
+         <p className="text-gray-500 mb-6">Eatriv is building your personalised meal plan and grocery list right now.</p>
+  <a href="/signup">
+    <button className="w-full bg-[#2D6A4F] text-white py-3 rounded-xl font-medium hover:bg-[#235c43] transition-all">
+      Go to my meal plan →
+    </button>
+  </a>
         </div>
       </main>
     );
