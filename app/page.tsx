@@ -15,11 +15,12 @@ export default function Home() {
         <p className="text-gray-500 text-lg mb-8 leading-relaxed">
           Your AI-powered nutrition coach. Personalised meal plans, grocery lists and workout reminders — built around your goals.
         </p>
-
-        <div className="flex flex-col sm:flex-row gap-3 justify-center">
-          <button className="bg-[#2D6A4F] text-white px-8 py-3 rounded-xl font-medium hover:bg-[#235c43] transition-all">
-            Get started free
-          </button>
+<div className="flex flex-col sm:flex-row gap-3 justify-center">
+  <a href="/onboarding">
+    <button className="bg-[#2D6A4F] text-white px-8 py-3 rounded-xl font-medium hover:bg-[#235c43] transition-all">
+      Get started free
+    </button>
+  </a>
           <button className="border border-[#2D6A4F] text-[#2D6A4F] px-8 py-3 rounded-xl font-medium hover:bg-[#F0FFF4] transition-all">
             See how it works
           </button>
