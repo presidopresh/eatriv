@@ -130,8 +130,12 @@ export default function Onboarding() {
     if (current < steps.length - 1) {
       setCurrent(current + 1);
     } else {
-      setDone(true);
-    }
+  localStorage.setItem("eatriv_answers", JSON.stringify({
+    ...answers,
+    body: { age, sex, weight, height }
+  }));
+  setDone(true);
+}
   }
 
   function back() {
