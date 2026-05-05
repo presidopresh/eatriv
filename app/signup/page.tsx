@@ -1,13 +1,28 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { supabase } from "../../lib/supabase";
 
 export default function Signup() {
   const [mode, setMode] = useState<"signup" | "login">("signup");
   const [form, setForm] = useState({ name: "", email: "", password: "" });
   const [loading, setLoading] = useState(false);
+  const [checking, setChecking] = useState(true);
   const [done, setDone] = useState(false);
   const [error, setError] = useState("");
+
+  useEffect(() => {
+    // Check if user is already logged in
+    async function checkUser() {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (session) {
+        // Already logged in — go straight to meal plan
+        window.location.href = "/mealplan";
+      } else {
+        setChecking(false);
+      }
+    }
+    checkUser();
+  }, []);
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     setForm({ ...form, [e.target.id]: e.target.value });
@@ -31,10 +46,22 @@ export default function Signup() {
         password: form.password,
       });
       if (error) { setError(error.message); setLoading(false); return; }
+      // Signed in successfully — go to meal plan
+      window.location.href = "/mealplan";
+      return;
     }
 
     setLoading(false);
     setDone(true);
+  }
+
+  // Show loading while checking session
+  if (checking) {
+    return (
+      <main className="min-h-screen bg-[#FEFDF8] flex items-center justify-center">
+        <div className="w-10 h-10 border-4 border-[#B7E4C7] border-t-[#2D6A4F] rounded-full animate-spin"></div>
+      </main>
+    );
   }
 
   if (done) {
@@ -45,18 +72,17 @@ export default function Signup() {
             🌿
           </div>
           <h2 className="text-3xl font-light text-[#1A1A1A] mb-2" style={{ fontFamily: "Georgia, serif" }}>
-            {mode === "signup" ? "Check your email!" : "Welcome back!"}
+            Check your email!
           </h2>
           <p className="text-gray-500 mb-6">
-            {mode === "signup"
-              ? "We sent you a confirmation email. Click the link to activate your account."
-              : "You're now signed in. Let's build your meal plan."}
+            We sent you a confirmation email. Click the link to activate your account then sign in.
           </p>
-          <a href="/onboarding">
-            <button className="w-full bg-[#2D6A4F] text-white py-3 rounded-xl font-medium hover:bg-[#235c43] transition-all">
-              {mode === "signup" ? "Got it →" : "Go to my meal plan →"}
-            </button>
-          </a>
+          <button
+            onClick={() => { setDone(false); setMode("login"); }}
+            className="w-full bg-[#2D6A4F] text-white py-3 rounded-xl font-medium hover:bg-[#235c43] transition-all"
+          >
+            Go to sign in →
+          </button>
         </div>
       </main>
     );
