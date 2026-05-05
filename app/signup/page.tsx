@@ -11,11 +11,23 @@ export default function Signup() {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    // Check if user is already logged in
     async function checkUser() {
+      // Handle email confirmation token in URL
+      const hashParams = new URLSearchParams(window.location.hash.substring(1));
+      const accessToken = hashParams.get("access_token");
+      
+      if (accessToken) {
+        // User just confirmed email — sign them in and go to meal plan
+        const { data: { session } } = await supabase.auth.getSession();
+        if (session) {
+          window.location.href = "/mealplan";
+          return;
+        }
+      }
+
+      // Check if already logged in
       const { data: { session } } = await supabase.auth.getSession();
       if (session) {
-        // Already logged in — go straight to meal plan
         window.location.href = "/mealplan";
       } else {
         setChecking(false);
