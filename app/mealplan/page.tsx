@@ -227,19 +227,13 @@ export default function MealPlan() {
             <div className="text-2xl font-light text-[#2D6A4F]" style={{ fontFamily: "Georgia, serif" }}>🌿 Eatriv</div>
             <div className="text-xs text-gray-400">Your AI meal plan</div>
           </div>
-         <div className="flex gap-2">
-  <a href="/pricing">
-    <button className="text-sm bg-[#2D6A4F] text-white px-4 py-2 rounded-xl hover:bg-[#235c43] transition-all">
-      ⭐ Upgrade
-    </button>
-  </a>
-  <button
-    onClick={regenerate}
-    className="text-sm text-[#2D6A4F] border border-[#2D6A4F] px-4 py-2 rounded-xl hover:bg-[#F0FFF4] transition-all"
-  >
-    🔄 Regenerate
-  </button>
-</div>
+          <button
+            onClick={regenerate}
+            className="text-sm text-[#2D6A4F] border border-[#2D6A4F] px-4 py-2 rounded-xl hover:bg-[#F0FFF4] transition-all"
+          >
+            🔄 Regenerate
+          </button>
+        </div>
 
         {/* Plan theme badge */}
         <div className="mb-4">
