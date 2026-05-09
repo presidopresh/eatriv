@@ -58,7 +58,6 @@ export default function Pricing() {
     <main className="min-h-screen bg-[#FEFDF8] px-4 py-10">
       <div className="max-w-lg mx-auto">
 
-        {/* Header */}
         <div className="text-center mb-8">
           <a href="/mealplan">
             <div className="text-2xl font-light text-[#2D6A4F] mb-4 cursor-pointer" style={{ fontFamily: "Georgia, serif" }}>
@@ -71,7 +70,6 @@ export default function Pricing() {
           <p className="text-gray-500 text-sm">Unlimited meal plans, grocery lists and workout reminders</p>
         </div>
 
-        {/* Currency toggle */}
         <div className="flex bg-white border border-gray-200 rounded-xl p-1 mb-6 max-w-xs mx-auto">
           <button
             onClick={() => setCurrency("NGN")}
@@ -91,7 +89,6 @@ export default function Pricing() {
           </button>
         </div>
 
-        {/* Free plan */}
         <div className="bg-white border border-gray-200 rounded-2xl p-6 mb-4">
           <div className="flex items-center justify-between mb-4">
             <div>
@@ -116,30 +113,25 @@ export default function Pricing() {
           </div>
         </div>
 
-        {/* Pro plan */}
         <div className="bg-[#2D6A4F] rounded-2xl p-6 mb-6 text-white">
 
-          {/* Popular badge */}
           <div className="inline-block bg-white text-[#2D6A4F] text-xs font-bold px-3 py-1 rounded-full mb-4">
             ⭐ MOST POPULAR
           </div>
 
-          {/* Plan name */}
           <div className="font-medium text-xl mb-1">Pro</div>
           <div className="text-green-200 text-sm mb-4">Everything you need to hit your goals</div>
 
-          {/* Price */}
           <div className="mb-1">
             <span className="text-4xl font-light">
               {currency === "NGN" ? "₦2,999" : "$4.99"}
             </span>
-            <span className="text-green-200 text-sm ml-1">/month</span>
+            <span className="text-green-200 text-sm ml-2">/month</span>
           </div>
           <div className="text-xs text-green-200 mb-6">
             {currency === "NGN" ? "~$4.99 USD equivalent · Cancel anytime" : "Cancel anytime · Billed monthly"}
           </div>
 
-          {/* Features */}
           <div className="space-y-2 mb-6">
             {[
               "Unlimited meal plans",
@@ -158,7 +150,6 @@ export default function Pricing() {
             ))}
           </div>
 
-          {/* Pay button */}
           <button
             onClick={currency === "NGN" ? handleNairaPayment : handleUSDPayment}
             className="w-full bg-white text-[#2D6A4F] py-4 rounded-xl font-medium text-base hover:bg-green-50 transition-all"
@@ -177,7 +168,6 @@ export default function Pricing() {
           </p>
         </div>
 
-        {/* Trust badges - display only, not buttons */}
         <div className="grid grid-cols-3 gap-3 text-center mb-6">
           <div className="bg-white border border-gray-100 rounded-xl p-4">
             <div className="text-2xl mb-2">🔒</div>
@@ -196,33 +186,17 @@ export default function Pricing() {
           </div>
         </div>
 
-        {/* FAQ */}
         <div className="bg-white border border-gray-200 rounded-2xl p-6 mb-6">
           <h3 className="font-medium text-[#1A1A1A] mb-4" style={{ fontFamily: "Georgia, serif" }}>
             Common questions
           </h3>
           <div className="space-y-4">
             {[
-              {
-                q: "Can I cancel anytime?",
-                a: "Yes! Cancel your subscription anytime with no questions asked. No hidden fees."
-              },
-              {
-                q: "How do Nigerian users pay?",
-                a: "Nigerian users pay with any Nigerian debit card, bank transfer or USSD — powered by Paystack."
-              },
-              {
-                q: "How do international users pay?",
-                a: "International users pay with Visa, Mastercard or any major card in USD."
-              },
-              {
-                q: "Is my payment safe?",
-                a: "Yes. All payments are processed by Paystack and Dodo Payments — both PCI-DSS compliant."
-              },
-              {
-                q: "What happens after I pay?",
-                a: "You get instant access to all Pro features — unlimited meal plans, reminders, workout plans and more."
-              }
+              { q: "Can I cancel anytime?", a: "Yes! Cancel your subscription anytime with no questions asked. No hidden fees." },
+              { q: "How do Nigerian users pay?", a: "Nigerian users pay with any Nigerian debit card, bank transfer or USSD — powered by Paystack." },
+              { q: "How do international users pay?", a: "International users pay with Visa, Mastercard or any major card in USD." },
+              { q: "Is my payment safe?", a: "Yes. All payments are processed by Paystack and Dodo Payments — both PCI-DSS compliant." },
+              { q: "What happens after I pay?", a: "You get instant access to all Pro features — unlimited meal plans, reminders, workout plans and more." }
             ].map((item, i) => (
               <div key={i} className="border-b border-gray-100 pb-4 last:border-0 last:pb-0">
                 <div className="font-medium text-sm text-[#1A1A1A] mb-1">{item.q}</div>
@@ -232,7 +206,6 @@ export default function Pricing() {
           </div>
         </div>
 
-        {/* Footer note */}
         <p className="text-center text-xs text-gray-400 pb-6">
           🇳🇬 Nigerian payments by Paystack · 🌍 International payments by Dodo Payments
         </p>
