@@ -203,9 +203,9 @@ export default function Signup() {
           {mode === "signup" && (
             <p className="text-xs text-gray-400 text-center mt-4 leading-relaxed">
               By signing up you agree to our{" "}
-              <span className="text-[#2D6A4F] cursor-pointer hover:underline">Terms of Service</span>{" "}
-              and{" "}
-              <span className="text-[#2D6A4F] cursor-pointer hover:underline">Privacy Policy</span>
+             <a href="/terms" className="text-[#2D6A4F] hover:underline">Terms of Service</a>
+{" "}and{" "}
+<a href="/privacy" className="text-[#2D6A4F] hover:underline">Privacy Policy</a>
             </p>
           )}
         </div>
