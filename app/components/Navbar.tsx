@@ -38,9 +38,11 @@ export default function Navbar() {
         <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
           {user ? (
             <>
-              <div style={{ width: 32, height: 32, borderRadius: "50%", background: "#F0FFF4", border: "1px solid #B7E4C7", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 13, fontWeight: 500, color: "#2D6A4F" }}>
-                {user.email?.[0]?.toUpperCase()}
-              </div>
+              <a href="/profile">
+  <div style={{ width: 32, height: 32, borderRadius: "50%", background: "#F0FFF4", border: "1px solid #B7E4C7", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 13, fontWeight: 500, color: "#2D6A4F", cursor: "pointer" }}>
+    {user.email?.[0]?.toUpperCase()}
+  </div>
+</a>
               <button onClick={signOut} style={{ fontSize: 13, color: "#9CA3AF", background: "none", border: "none", cursor: "pointer" }}>
                 Sign out
               </button>
