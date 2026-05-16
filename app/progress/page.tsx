@@ -64,8 +64,8 @@ export default function Progress() {
   const currentWeight = weightLog.length > 0 ? weightLog[weightLog.length - 1].weight : null;
   const startWeightNum = parseFloat(startWeight) || 0;
   const goalWeightNum = parseFloat(goalWeight) || 0;
-  const totalLost = currentWeight && startWeightNum ? (startWeightNum - currentWeight).toFixed(1) : 0;
-  const toGoal = currentWeight && goalWeightNum ? (currentWeight - goalWeightNum).toFixed(1) : 0;
+  const totalLost = currentWeight && startWeightNum ? parseFloat((startWeightNum - currentWeight).toFixed(1)) : 0;
+  const toGoal = currentWeight && goalWeightNum ? parseFloat((currentWeight - goalWeightNum).toFixed(1)) : 0;
 
   // Progress percentage
   const progressPct = startWeightNum && goalWeightNum && currentWeight
