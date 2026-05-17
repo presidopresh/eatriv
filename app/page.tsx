@@ -43,9 +43,14 @@ export default function Home() {
           </a>
         </div>
 
-        <p className="text-gray-400 text-sm mt-6">
-          $4.99/mo after free trial · Cancel anytime
-        </p>
+       <p className="text-gray-400 text-sm mt-6">
+  $4.99/mo after free trial · Cancel anytime
+</p>
+<div className="flex gap-4 justify-center mt-4">
+  <a href="/terms" className="text-xs text-gray-400 hover:text-[#2D6A4F] transition-all">Terms of Service</a>
+  <a href="/privacy" className="text-xs text-gray-400 hover:text-[#2D6A4F] transition-all">Privacy Policy</a>
+  <a href="mailto:eatrivapp@gmail.com" className="text-xs text-gray-400 hover:text-[#2D6A4F] transition-all">Contact</a>
+</div>
 
       </div>
     </main>
